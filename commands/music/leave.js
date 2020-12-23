@@ -17,10 +17,7 @@ module.exports = class LeaveCommand extends Command {
         if (!voiceChannel) {
             message.reply('Join a channel and try again');
             return;
-        } else if (
-            typeof message.guild.musicData.songDispatcher == 'undefined' ||
-            message.guild.musicData.songDispatcher == null
-        ) {
+        } else if (typeof message.guild.musicData.songDispatcher == 'undefined' || message.guild.musicData.songDispatcher == null) {
             message.reply('There is no song playing right now!');
             return;
         } else if (voiceChannel.id !== message.guild.me.voice.channel.id) {

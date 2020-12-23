@@ -1,7 +1,7 @@
 const colorNames = require('colornames');
 const { MessageEmbed } = require('discord.js');
 const { Command } = require('discord.js-commando');
-const Guild = require(`${process.cwd()}/schemas/Guilds`);
+const Guild = require(`${process.cwd()}/schemas/Guild`);
 
 module.exports = class ChannelsCommand extends Command {
     constructor(client) {
@@ -24,7 +24,8 @@ module.exports = class ChannelsCommand extends Command {
                     default: '',
                     error: 'You provided an invalid text channel',
                 }
-            ]
+            ],
+            userPermissions: ['MANAGE_GUILD'],
         });
     }
 

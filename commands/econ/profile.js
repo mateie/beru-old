@@ -1,5 +1,4 @@
 const { MessageAttachment } = require("discord.js");
-
 const { Command } = require('discord.js-commando');
 
 module.exports = class ProfileCommand extends Command {

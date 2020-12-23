@@ -3,17 +3,17 @@ const Check = require('../util/check');
 const check = new Check(client);
 const Cards = require('../util/cards');
 
-const Guilds = require(`${process.cwd()}/schemas/Guilds`);
-const Users = require(`${process.cwd()}/schemas/Users`);
+const Guild = require(`${process.cwd()}/schemas/Guild`);
+const User = require(`${process.cwd()}/schemas/User`);
 
 client.on('guildMemberRemove', async member => {
     check.users();
 
-    let guild = await Guilds.findOne({
+    let guild = await Guild.findOne({
         id: member.guild.id,
     });
 
-    let user = await Users.findOne({
+    let user = await User.findOne({
         id: member.id,
     });
 

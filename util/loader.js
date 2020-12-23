@@ -26,6 +26,8 @@ module.exports = class Loader {
             unknownCommand: false,
         })
         .registerCommandsIn(`${process.cwd()}/commands`);
+
+        console.info('Registry Loaded');
     }
 
     events() {
@@ -54,11 +56,5 @@ module.exports = class Loader {
         })
         .then(() => console.info('Connected to the Database'))
         .catch(err => console.error(err));
-    }
-
-    dashboard() {
-        const Dashboard = require(`${process.cwd()}/dashboard/app`);
-
-        Dashboard();
     }
 };

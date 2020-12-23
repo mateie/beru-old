@@ -33,8 +33,8 @@ module.exports = {
 const Loader = require('./util/loader');
 const load = new Loader(client);
 
+load.db();
 load.registry();
 load.events();
-load.db();
 
 client.login(process.env.BOT_TOKEN);

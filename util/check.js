@@ -1,5 +1,5 @@
-const Users = require('../schemas/Users');
-const Guilds = require('../schemas/Guilds');
+const Users = require('../schemas/User');
+const Guilds = require('../schemas/Guild');
 
 module.exports = class Check {
     constructor(client) {

@@ -48,4 +48,4 @@ usersSchema.statics.getRank = async function(user) {
     return mapped.find(u => u.id == user.id).rank;
 };
 
-module.exports = mongoose.model('users', usersSchema);
+module.exports = mongoose.model('User', usersSchema);

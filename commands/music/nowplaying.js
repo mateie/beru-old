@@ -15,16 +15,18 @@ module.exports = class NowPlayingCommand extends Command {
 
     run(message) {
         if (!message.guild.musicData.isPlaying && !message.guild.musicData.nowPlaying) {
-            return message.say('There is no song playing right now');
+            return message.reply('There is no song playing right now');
         }
 
         const video = message.guild.musicData.nowPlaying;
         let description;
 
-        if (video.duration == 'Live Stream') {
-            description = 'Live Stream';
-        } else {
-            description = NowPlayingCommand.playbackBar(message, video);
+        if (video) {
+            if (video.duration == 'Live Stream') {
+                description = 'Live Stream';
+            } else {
+                description = this.playbackBar(message, video);
+            }
         }
 
         const title = message.guild.musicData.loopSong
@@ -40,20 +42,20 @@ module.exports = class NowPlayingCommand extends Command {
         return;
     }
 
-    static playbackBar(message, video) {
+    playbackBar(message, video) {
         const passedTimeInMS = message.guild.musicData.songDispatcher.streamTime;
         const passedTimeinMSObj = {
             seconds: Math.floor((passedTimeInMS / 1000) % 60),
-            minutes: Math.floor((passedTimeInMS / (100 * 60)) % 60),
-            hours: Math.floor((passedTimeInMS / (100 * 60 * 60)) % 24),
+            minutes: Math.floor((passedTimeInMS / (1000 * 60)) % 60),
+            hours: Math.floor((passedTimeInMS / (1000 * 60 * 60)) % 24),
         };
 
-        const passedTimeFormatted = NowPlayingCommand.formatDuration(
+        const passedTimeFormatted = this.formatDuration(
             passedTimeinMSObj,
         );
 
         const totalDurationObj = video.rawDuration;
-        const totalDurationFormatted = NowPlayingCommand.formatDuration(
+        const totalDurationFormatted = this.formatDuration(
             totalDurationObj,
         );
 
@@ -92,7 +94,7 @@ module.exports = class NowPlayingCommand extends Command {
         return playBack;
     }
 
-    static formatDuration(durationObj) {
+    formatDuration(durationObj) {
         const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${durationObj.minutes ? durationObj.minutes : '00'
             }:${(durationObj.seconds < 10)
                 ? ('0' + durationObj.seconds)

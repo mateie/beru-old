@@ -1,6 +1,6 @@
 /* eslint-disable no-async-promise-executor */
 const { MessageEmbed } = require('discord.js');
-const Users = require('../schemas/Users');
+const User = require('../schemas/User');
 const { Rank } = require('canvacord');
 
 module.exports = class BeruUsers {
@@ -10,12 +10,12 @@ module.exports = class BeruUsers {
 
     async giveUserXP(member, amount = 1) {
         try {
-            let userXP = await Users.findOne({
+            let userXP = await User.findOne({
                 id: member.user.id,
             });
 
             if(!userXP) {
-                const newXP = new Users({
+                const newXP = new User({
                     id: member.user.id,
                     username: member.user.username,
                 });
@@ -34,12 +34,12 @@ module.exports = class BeruUsers {
     }
 
     async getUserXP(member) {
-        const userXP = await Users.findOne({
+        const userXP = await User.findOne({
             id: member.user.id,
         });
 
         if (!userXP) {
-            const newXP = new Users({
+            const newXP = new User({
                 id: member.user.id,
                 username: member.user.username,
             });
@@ -96,7 +96,7 @@ module.exports = class BeruUsers {
     async getCardData(userXP) {
         const currentXP = userXP.xp - this.calculateXPForLevel(userXP.level);
         const neededXP = this.calculateRequiredXP(userXP.xp) + currentXP;
-        const rank = await Users.getRank(userXP);
+        const rank = await User.getRank(userXP);
 
         return {
             rank: rank,

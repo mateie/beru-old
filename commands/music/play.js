@@ -36,7 +36,7 @@ module.exports = class PlayCommand extends Command {
         const voiceChannel = message.member.voice.channel;
 
         if (!voiceChannel) {
-            message.say('Join a **Voice Channel** and try again');
+            message.reply('Join a **Voice Channel** and try again');
             return;
         }
 
@@ -48,7 +48,7 @@ module.exports = class PlayCommand extends Command {
                 const id = query.id;
                 const video = await youtube.getVideoByID(id).catch(e => {
                     console.error(e);
-                    message.say('There was a problem getting the video you provided!');
+                    message.reply('There was a problem getting the video you provided!');
                     return;
                 });
 

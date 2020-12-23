@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { Command, CommandDispatcher } = require('discord.js-commando');
-const Users = require(`${process.cwd()}/schemas/Users`);
+const User = require(`${process.cwd()}/schemas/User`);
 const { rankEmoji } = require(`${process.cwd()}/util/xp`);
 
 module.exports = class LeaderboardCommand extends Command {
@@ -24,7 +24,7 @@ module.exports = class LeaderboardCommand extends Command {
     }
 
     run(message, { amount }) {
-        Users.find().sort({ level: -1, xp: -1 }).limit(amount)
+        User.find().sort({ level: -1, xp: -1 }).limit(amount)
         .then(users => {
             const embed = new MessageEmbed()
             .setTitle(`Top ${amount} Leaderboard`);

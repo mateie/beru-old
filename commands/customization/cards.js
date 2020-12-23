@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 let toHex = require('colornames');
 
-const Guilds = require(`${process.cwd()}/schemas/Guilds`);
-const Users = require(`${process.cwd()}/schemas/Users`);
+const Guild = require(`${process.cwd()}/schemas/Guild`);
+const User = require(`${process.cwd()}/schemas/User`);
 
 module.exports = class CardsCommand extends Command {
     constructor(client) {
@@ -37,7 +37,7 @@ module.exports = class CardsCommand extends Command {
         switch (which) {
             case 'guild':
                 if (message.member.hasPermission('MANAGE_GUILD')) {
-                    const guild = await Guilds.findOne({
+                    const guild = await Guild.findOne({
                         id: message.guild.id,
                     });
 
@@ -63,7 +63,7 @@ module.exports = class CardsCommand extends Command {
                 }
                 break;
             case 'profile':
-                const user = await Users.findOne({
+                const user = await User.findOne({
                     id: message.member.user.id,
                 });
 

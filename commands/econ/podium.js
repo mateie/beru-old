@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const DIG = require('discord-image-generation');
 const { MessageAttachment } = require('discord.js');
 
-const Users = require(`${process.cwd()}/schemas/Users`);
+const User = require(`${process.cwd()}/schemas/User`);
 
 module.exports = class PodiumCommand extends Command {
     constructor(client) {
@@ -15,7 +15,7 @@ module.exports = class PodiumCommand extends Command {
     }
 
     async run(message) {
-        const users = await Users.find().sort({ level: -1 }).limit(3);
+        const users = await User.find().sort({ level: -1 }).limit(3);
 
         const members = {};
 

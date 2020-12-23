@@ -1,7 +1,6 @@
 const { MessageEmbed, Channel } = require('discord.js');
 const { Command } = require('discord.js-commando');
-const { toLowerCase } = require('ffmpeg-static');
-const Guild = require(`${process.cwd()}/schemas/Guilds`);
+const Guild = require(`${process.cwd()}/schemas/Guild`);
 
 module.exports = class TogglesCommand extends Command {
     constructor(client) {
@@ -24,7 +23,8 @@ module.exports = class TogglesCommand extends Command {
                     oneOf: ['enable', 'disable'],
                     default: '',
                 }
-            ]
+            ],
+            userPermissions: ['MANAGE_GUILD'],
         });
     }
 

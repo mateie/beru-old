@@ -3,8 +3,8 @@ const { Command } = require('discord.js-commando');
 const e = require('express');
 const Check = require(`${process.cwd()}/util/check`);
 
-const Users = require(`${process.cwd()}/schemas/Users`);
-const Guilds = require(`${process.cwd()}/schemas/Guilds`);
+const User = require(`${process.cwd()}/schemas/User`);
+const Guild = require(`${process.cwd()}/schemas/Guild`);
 
 module.exports = class ResetDatabaseCommand extends Command {
     constructor(client) {
@@ -59,7 +59,7 @@ module.exports = class ResetDatabaseCommand extends Command {
 
     resetUsers(message) {
         return new Promise((resolve, reject) => {
-            Users.collection.drop((err, result) => {
+            User.collection.drop((err, result) => {
                 if (err) reject(err);
                 if (result) {
                     setTimeout(() => {
@@ -83,7 +83,7 @@ module.exports = class ResetDatabaseCommand extends Command {
 
     resetGuilds(message) {
         return new Promise((resolve, reject) => {
-            Guilds.collection.drop((err, result) => {
+            Guild.collection.drop((err, result) => {
                 if (err) reject(err);
                 if (result) {
                     setTimeout(() => {
