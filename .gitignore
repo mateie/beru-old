@@ -4,10 +4,6 @@
 ### Exe ###
 *.exe
 
-### Dashboard ###
-dashboard/*
-dashboard
-
 ### Node ###
 # Logs
 logs

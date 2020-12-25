@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
-import auth from './auth';
-import navigation from './navigation';
-import alerts from './alerts';
-import register from './register';
+import authReducer from './authReducer';
+import errorReducer from './errorReducer';
 
 export default combineReducers({
-  alerts,
-  auth,
-  navigation,
-  register,
+    auth: authReducer,
+    errors: errorReducer,
 });
