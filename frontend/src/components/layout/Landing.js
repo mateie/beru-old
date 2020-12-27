@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
+import { getBot } from '../../actions/botActions';
+import { Button, Container } from 'semantic-ui-react';
 
-class Navbar extends Component {
-    constructor(props) {
-        super(props);
-        this.login = this.login.bind(this);
+class Landing extends Component {
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
+
+        this.props.getBot();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -22,29 +26,37 @@ class Navbar extends Component {
         }
     }
 
-    login() {
+    login = e => {
+        e.preventDefault();
+
         this.props.loginUser();
     }
 
     render() {
+        const { bot } = this.props.bot;
         return (
-            <div className="navbar-fixed">
-                <button onClick={this.login}>Login</button>
-            </div>
+            <Container>
+                <Button onClick={this.login}>Log in</Button>
+            </Container>
         );
     }
 }
 
-Navbar.propTypes = {
+Landing.propTypes = {
     loginUser: PropTypes.func.isRequired,
+    getBot: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
+    bot: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
     auth: state.auth,
+    bot: state.bot,
     errors: state.errors
 });
+
 export default connect(
     mapStateToProps,
-    { loginUser }
-)(Navbar);
+    { loginUser, getBot }
+)(Landing);

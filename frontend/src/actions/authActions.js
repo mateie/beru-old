@@ -1,4 +1,3 @@
-import { DiscordAPIError } from 'discord.js';
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
@@ -16,7 +15,6 @@ export const loginUser = () => dispatch => {
     } else {
         setAuthToken(userToken);
         const decoded = jwt_decode(userToken);
-        console.log(decoded);
         const DiscordOauth2 = require("discord-oauth2");
         const oauth = new DiscordOauth2();
 

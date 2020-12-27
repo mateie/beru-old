@@ -19,6 +19,8 @@
   "homepage": "https://github.com/mateie/beru-backend#readme",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
+    "ascii-art": "^2.5.0",
+    "ascii-art-font": "^1.0.2",
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "canvacord": "^5.0.8",
